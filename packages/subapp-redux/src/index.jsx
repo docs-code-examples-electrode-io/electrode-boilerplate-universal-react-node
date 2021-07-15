@@ -16,6 +16,14 @@ export function reduxRenderStart(options) {
   const store = options._store || options.reduxCreateStore(options.initialState);
   const { Component } = options;
 
+  if (!options.element) {
+    return (
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    );
+  }
+
   if (options.serverSideRendering) {
     hydrate(
       <Provider store={store}>
